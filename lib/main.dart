@@ -7,12 +7,26 @@ import 'package:dashboard_doctor_app/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:window_manager/window_manager.dart';
 import 'keys/supabase_keys.dart';
 import 'theme/theme.dart';
-import 'views/login_view.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+ WidgetsFlutterBinding.ensureInitialized();
+
+  await windowManager.ensureInitialized();
+
+  WindowOptions windowOptions = const WindowOptions(
+    size: Size(1200, 800), 
+    minimumSize: Size(1000, 650), 
+    center: true,
+    title: "لوحة تحكم المستشار الطبي",
+  );
+
+  windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.show();
+    await windowManager.focus();
+  });
   await Supabase.initialize(
     url: SupabaseKeys.url,
     anonKey: SupabaseKeys.anonKey,
