@@ -2,19 +2,56 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/pharmacy_model.dart';
 
 class PharmacyService {
-  static final _db = Supabase.instance.client;
+  static final SupabaseClient _db = Supabase.instance.client;
 
   static Future<List<PharmacyModel>> getAll() async {
-    final res = await _db.from('pharmacies').select().order('name');
-    return res.map((e) => PharmacyModel.fromJson(e)).toList();
+    final response =
+        await _db.from('pharmacies').select().order('name');
+
+    return response
+        .map((e) => PharmacyModel.fromJson(e))
+        .toList();
   }
 
-  static Future<void> add(Map<String, dynamic> data) async {
-    await _db.from('pharmacies').insert(data);
+  static Future<void> add({
+    required String name,
+    String? address,
+    String? phoneNumber,
+    String? openingTime,
+    String? closingTime,
+    double? latitude,
+    double? longitude,
+  }) async {
+    await _db.from('pharmacies').insert({
+      'name': name,
+      'address': address,
+      'phone_number': phoneNumber,
+      'opening_time': openingTime,
+      'closing_time': closingTime,
+      'latitude': latitude,
+      'longitude': longitude,
+    });
   }
 
-  static Future<void> update(int id, Map<String, dynamic> data) async {
-    await _db.from('pharmacies').update(data).eq('id', id);
+  static Future<void> update({
+    required int id,
+    required String name,
+    String? address,
+    String? phoneNumber,
+    String? openingTime,
+    String? closingTime,
+    double? latitude, 
+    double? longitude,
+  }) async {
+    await _db.from('pharmacies').update({
+      'name': name,
+      'address': address,
+      'phone_number': phoneNumber,
+      'opening_time': openingTime,
+      'closing_time': closingTime,
+      'latitude': latitude,
+      'longitude': longitude,
+    }).eq('id', id);
   }
 
   static Future<void> delete(int id) async {
