@@ -3,6 +3,7 @@ import 'package:dashboard_doctor_app/cubits/DailyInfoCubit/daily_info_cubit.dart
 import 'package:dashboard_doctor_app/cubits/DrugCubit/drugs_cubit.dart';
 import 'package:dashboard_doctor_app/cubits/OnDutyCubit/on_duty_cubit.dart';
 import 'package:dashboard_doctor_app/cubits/PharmacyCubit/pharmacy_cubit.dart';
+import 'package:dashboard_doctor_app/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -45,7 +46,7 @@ class DashBoardDoctorApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: "لوحة تحكم المستشار الطبي",
         theme: appTheme,
-        home: const LoginView(),
+        home: const SplashView(),
       ),
     );
   }
