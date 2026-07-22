@@ -1,4 +1,5 @@
 import 'package:dashboard_doctor_app/cubits/DrugCubit/drugs_cubit.dart';
+import 'package:dashboard_doctor_app/cubits/OnDutyCubit/on_duty_cubit.dart';
 import 'package:dashboard_doctor_app/cubits/PharmacyCubit/pharmacy_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +28,9 @@ class DashBoardDoctorApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => PharmacyCubit(),
+        ),
+        BlocProvider(
+          create: (_) => OnDutyCubit(),
         ),
       ],
       child: MaterialApp(
